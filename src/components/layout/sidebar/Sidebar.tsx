@@ -1,20 +1,25 @@
+'use client'
+
+import dynamic from 'next/dynamic'
+import { SidebarHeading } from './SidebarHeading'
+import { SidebarMenu } from './SidebarMenu'
+import { SidebarProfile } from './SidebarProfile'
+import { SidebarProjects } from './SidebarProjects'
+
 export default function Sidebar() {
 	return (
-		<nav className='w-64 h-screen bg-gray-800 text-white p-4'>
-			<ul>
-				<li>
-					<a href='#'>Home</a>
-				</li>
-				<li>
-					<a href='#'>About</a>
-				</li>
-				<li>
-					<a href='#'>Services</a>
-				</li>
-				<li>
-					<a href='#'>Contact</a>
-				</li>
-			</ul>
+		<nav className='p-5 bg-white dark:bg-neutral-900 h-screen '>
+			<SidebarHeading title='Account' />
+
+			<SidebarProfile />
+
+			<SidebarHeading title='Main Menu' />
+
+			<SidebarMenu />
+
+			<SidebarHeading title='Projects' />
+
+			<SidebarProjects />
 		</nav>
 	)
 }

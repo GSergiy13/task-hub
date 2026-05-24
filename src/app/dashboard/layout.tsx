@@ -7,10 +7,10 @@ export default function DashboardLayout({
 	children: ReactNode
 }>) {
 	return (
-		<div className='flex'>
+		<div className='grid grid-cols-[250px_1fr] h-screen'>
 			<Sidebar />
 
-			<main className='flex-1 p-4'>{children}</main>
+			<main className='p-5'>{children}</main>
 		</div>
 	)
 }
