@@ -2,6 +2,7 @@
 
 import { Heading } from '@/components/ui/Heading'
 import { SearchField } from '@/components/ui/search-field/SearchField'
+import { ProjectChart } from './project-chart/ProjectChart'
 import { ProjectStats } from './project-stats/ProjectStats'
 
 export const ClientDashboard = () => {
@@ -17,7 +18,7 @@ export const ClientDashboard = () => {
 				<div className='grid grid-cols-[35%_65%] gap-6'>
 					<ProjectStats />
 
-					<div>Chart</div>
+					<ProjectChart />
 				</div>
 			</div>
 
