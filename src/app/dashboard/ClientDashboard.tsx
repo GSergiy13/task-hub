@@ -2,6 +2,7 @@
 
 import { Heading } from '@/components/ui/Heading'
 import { SearchField } from '@/components/ui/search-field/SearchField'
+import { LastTasks } from './last-tasks/LastTasks'
 import { ProjectChart } from './project-chart/ProjectChart'
 import { ProjectStats } from './project-stats/ProjectStats'
 
@@ -15,11 +16,13 @@ export const ClientDashboard = () => {
 					<SearchField value='' onChange={() => {}} />
 				</div>
 
-				<div className='grid grid-cols-[35%_65%] gap-6'>
+				<div className='grid grid-cols-[35%_65%] gap-6 mb-7'>
 					<ProjectStats />
 
 					<ProjectChart />
 				</div>
+
+				<LastTasks />
 			</div>
 
 			<div className='p-5 h-screen flex justify-center items-center '>Chat</div>
