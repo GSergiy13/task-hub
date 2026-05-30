@@ -1,12 +1,14 @@
-import type { ITask } from '@/types/task.types'
+import { ProgressBar } from './ProgressBar'
 import {
 	Edit2,
 	Link,
 	Image as LucideImage,
 	MessageSquareMore,
-	Plus,
+	Plus
 } from 'lucide-react'
 import Image from 'next/image'
+
+import type { ITask } from '@/types/task.types'
 
 interface Props {
 	task: ITask
@@ -18,56 +20,79 @@ export function Task({ task }: Props) {
 	const progress = Math.round((completedCount / totalCount) * 100)
 
 	return (
-		<div>
-			<div className='flex items-center gap-2 mb-2'>
-				<div className='p-1.5 rounded-full bg-primary/30 flex items-center justify-center'>
-					<task.icon />
+		<div className='bg-card rounded-xl p-3.5'>
+			<div className='mb-2 flex items-start justify-between gap-1'>
+				<div className='flex items-start gap-3'>
+					<div className='bg-primary/10 text-primary flex items-center justify-center rounded-full p-1.5 dark:bg-white/10 dark:text-white'>
+						<task.icon />
+					</div>
+
+					<div className='w-32'>
+						<p className='mb-1 text-sm leading-tight font-medium wrap-normal opacity-90'>
+							{task.title}
+						</p>
+
+						<div>
+							<p className='text-xs opacity-50'>
+								Due:{' '}
+								{Math.ceil(
+									(+task.dueDate - Date.now()) / (1000 * 60 * 60 * 24)
+								)}{' '}
+								days
+							</p>
+						</div>
+					</div>
 				</div>
-				<span>{task.title}</span>
-				<div className='flex items-center -space-x-1'>
+				<div className='flex items-center -space-x-2'>
 					{task.users.map(user => (
 						<div key={user.id}>
 							<Image
 								src={user.avatarPath || ''}
 								alt={user.name}
-								width={24}
-								height={24}
+								width={32}
+								height={32}
+								className='rounded-full border border-white dark:border-neutral-800'
 							/>
 						</div>
 					))}
 				</div>
 			</div>
 
-			<div>
-				<span>
-					Due: {Math.ceil((+task.dueDate - Date.now()) / (1000 * 60 * 60 * 24))}{' '}
-					days
-				</span>
-			</div>
-
-			<div>
-				<span>{progress}%</span>
+			<div className='my-3'>
+				<ProgressBar progress={progress} />
 			</div>
 
 			<div className='flex items-center justify-between'>
-				<div className='flex items-center gap-2'>
-					<span className='flex items-center gap-1'>
-						<MessageSquareMore /> {task.comments.length}
+				<div className='flex items-center gap-3'>
+					<span className='flex items-center gap-1 text-xs'>
+						<MessageSquareMore
+							className='opacity-40'
+							size={12}
+						/>{' '}
+						{task.comments.length}
 					</span>
-					<span className='flex items-center gap-1'>
-						<LucideImage /> {task.resources.length}
+					<span className='flex items-center gap-1 text-xs'>
+						<LucideImage
+							className='opacity-40'
+							size={12}
+						/>{' '}
+						{task.resources.length}
 					</span>
-					<span className='flex items-center gap-1'>
-						<Link /> {task.links.length}
+					<span className='flex items-center gap-1 text-xs'>
+						<Link
+							className='opacity-40'
+							size={12}
+						/>{' '}
+						{task.links.length}
 					</span>
 				</div>
 
 				<div className='flex items-center gap-2'>
-					<button>
-						<Plus />
+					<button className='bg-primary rounded-full p-1.5 text-white dark:bg-white/10 dark:text-white'>
+						<Plus size={16} />
 					</button>
-					<button>
-						<Edit2 />
+					<button className='bg-primary/10 text-primary rounded-full p-1.5 dark:bg-white/10 dark:text-white'>
+						<Edit2 size={16} />
 					</button>
 				</div>
 			</div>
