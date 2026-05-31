@@ -20,7 +20,7 @@ export function Task({ task }: Props) {
 	const progress = Math.round((completedCount / totalCount) * 100)
 
 	return (
-		<div className='bg-card rounded-xl p-3.5'>
+		<div className='bg-card w-full min-w-0 rounded-xl p-3.5'>
 			<div className='mb-2 flex items-start justify-between gap-1'>
 				<div className='flex items-start gap-3'>
 					<div className='bg-primary/10 text-primary flex items-center justify-center rounded-full p-1.5 dark:bg-white/10 dark:text-white'>

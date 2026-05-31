@@ -1,5 +1,8 @@
 'use client'
 
+import { monthlyData, yearlyData } from '../data/project-chart.data'
+import { ProjectChartHeader } from './ProjectChartHeader'
+import { ProjectChartTooltip } from './ProjectChartTooltip'
 import { useMemo, useState } from 'react'
 import {
 	Area,
@@ -9,16 +12,13 @@ import {
 	ResponsiveContainer,
 	Tooltip,
 	XAxis,
-	YAxis,
+	YAxis
 } from 'recharts'
-import { monthlyData, yearlyData } from '../data/project-chart.data'
-import { ProjectChartHeader } from './ProjectChartHeader'
-import { ProjectChartTooltip } from './ProjectChartTooltip'
 
 export const ProjectChart = () => {
 	const [selectRange, setSelectRange] = useState<ITimeRange>({
 		label: 'Yearly',
-		value: 'yearly',
+		value: 'yearly'
 	})
 
 	const data = selectRange.value === 'yearly' ? yearlyData : monthlyData
@@ -38,27 +38,44 @@ export const ProjectChart = () => {
 
 		return {
 			value: maxValue,
-			period: maxPeriod,
+			period: maxPeriod
 		}
 	}, [data])
 
 	return (
-		<div className='h-full bg-white p-5 rounded-2xl'>
+		<div className='bg-card h-full rounded-2xl p-5'>
 			<ProjectChartHeader
 				onChangeRange={setSelectRange}
 				selectedRange={selectRange}
 			/>
 
-			<ResponsiveContainer width={'100%'} height={300}>
+			<ResponsiveContainer
+				width={'100%'}
+				height={300}
+			>
 				<AreaChart
 					data={data}
 					margin={{ top: 10, right: 5, bottom: 0, left: -30 }}
 				>
 					<defs>
-						<linearGradient id='colorGradient' x1='0' y1='0' x2='0' y2='1'>
-							<stop offset='5%' stopColor='#725BF2' stopOpacity={0.3} />
+						<linearGradient
+							id='colorGradient'
+							x1='0'
+							y1='0'
+							x2='0'
+							y2='1'
+						>
+							<stop
+								offset='5%'
+								stopColor='#725BF2'
+								stopOpacity={0.3}
+							/>
 
-							<stop offset='95%' stopColor='#725BF2' stopOpacity={0} />
+							<stop
+								offset='95%'
+								stopColor='#725BF2'
+								stopOpacity={0}
+							/>
 						</linearGradient>
 					</defs>
 					<CartesianGrid
@@ -81,7 +98,10 @@ export const ProjectChart = () => {
 						domain={[0, 'dataMax + 10']}
 					/>
 
-					<Tooltip content={<ProjectChartTooltip />} cursor={false} />
+					<Tooltip
+						content={<ProjectChartTooltip />}
+						cursor={false}
+					/>
 
 					{maxData && (
 						<ReferenceLine

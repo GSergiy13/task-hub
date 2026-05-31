@@ -1,5 +1,5 @@
-import type { LucideIcon } from 'lucide-react'
 import type { IProfile } from './profile.type'
+import type { LucideIcon } from 'lucide-react'
 
 export interface ISubTask {
 	id: string
@@ -16,3 +16,8 @@ export interface ITask extends ISubTask {
 	users: IProfile[]
 	subTasks: ISubTask[]
 }
+export type TTaskStatus =
+	| 'not-started'
+	| 'in-progress'
+	| 'completed'
+	| 'blocked'

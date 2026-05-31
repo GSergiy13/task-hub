@@ -1,22 +1,26 @@
 'use client'
 
-import { Heading } from '@/components/ui/Heading'
-import { SearchField } from '@/components/ui/search-field/SearchField'
 import { LastTasks } from './last-tasks/LastTasks'
 import { ProjectChart } from './project-chart/ProjectChart'
 import { ProjectStats } from './project-stats/ProjectStats'
+
+import { Heading } from '@/components/ui/Heading'
+import { SearchField } from '@/components/ui/search-field/SearchField'
 
 export const ClientDashboard = () => {
 	return (
 		<div className='grid grid-cols-[2.7fr_1fr]'>
 			<div>
-				<div className='flex justify-between w-full mb-6'>
+				<div className='mb-6 flex w-full justify-between'>
 					<Heading>Dashboard</Heading>
 
-					<SearchField value='' onChange={() => {}} />
+					<SearchField
+						value=''
+						onChange={() => {}}
+					/>
 				</div>
 
-				<div className='grid grid-cols-[35%_65%] gap-6 mb-7'>
+				<div className='mb-7 grid grid-cols-[35%_65%] gap-4'>
 					<ProjectStats />
 
 					<ProjectChart />
@@ -25,7 +29,7 @@ export const ClientDashboard = () => {
 				<LastTasks />
 			</div>
 
-			<div className='p-5 h-screen flex justify-center items-center '>Chat</div>
+			<div className='flex h-screen items-center justify-center p-5'>Chat</div>
 		</div>
 	)
 }
