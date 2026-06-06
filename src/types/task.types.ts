@@ -21,3 +21,5 @@ export type TTaskStatus =
 	| 'in-progress'
 	| 'completed'
 	| 'blocked'
+
+export type TTaskFormData = Pick<ITask, 'title' | 'dueDate' | 'icon'>

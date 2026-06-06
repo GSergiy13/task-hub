@@ -6,8 +6,8 @@ interface EditTaskModalProps {
 	}
 }
 
-export default function EditTaskModal({ params }: EditTaskModalProps) {
-	console.log('Edit Task Modal ID:', params.id)
+export default async function EditTaskModal({ params }: EditTaskModalProps) {
+	const { id } = await params
 
-	return <TaskEditModalClient id={params.id} />
+	return <TaskEditModalClient id={id} />
 }

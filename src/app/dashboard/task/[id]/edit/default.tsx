@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default async function EditTaskPage({ params }: Props) {
-	const { id } = params
+	const { id } = await params
 	console.log('Edit Task Page ID:', id)
 
 	return (
