@@ -1,6 +1,5 @@
 'use client'
 
-import { TASK_ICONS } from './task-icons.data'
 import { TaskSchema } from '@/zod-schemes/task.zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
@@ -26,6 +25,8 @@ import {
 	PopoverContent,
 	PopoverTrigger
 } from '@/components/ui/popover'
+
+import { ICON_MAP, ICON_NAMES } from '@/utils/icon-map'
 
 import type { TTaskFormData } from '@/types/task.types'
 
@@ -149,19 +150,21 @@ export function TaskEditModalClient({ id }: Props) {
 									<FormLabel>Icon</FormLabel>
 									<FormControl>
 										<div className='flex flex-wrap gap-2'>
-											{TASK_ICONS.map((Icon, index) => (
-												<Button
-													key={index}
-													type='button'
-													variant={
-														value?.name === Icon.name ? 'default' : 'outline'
-													}
-													onClick={() => onChange(Icon)}
-													className='p-2'
-												>
-													<Icon />
-												</Button>
-											))}
+											{ICON_NAMES.map(name => {
+												const Icon = ICON_MAP[name]
+
+												return (
+													<Button
+														type='button'
+														name={name}
+														variant={value === name ? 'default' : 'outline'}
+														onClick={() => onChange(name)}
+														className='p-2'
+													>
+														<Icon />
+													</Button>
+												)
+											})}
 										</div>
 									</FormControl>
 									<FormMessage />

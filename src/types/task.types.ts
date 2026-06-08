@@ -1,5 +1,6 @@
 import type { IProfile } from './profile.type'
-import type { LucideIcon } from 'lucide-react'
+
+import type { IconName } from '@/utils/icon-map'
 
 export interface ISubTask {
 	id: string
@@ -8,7 +9,7 @@ export interface ISubTask {
 }
 
 export interface ITask extends ISubTask {
-	icon: LucideIcon
+	icon: IconName
 	dueDate: Date
 	comments: string[]
 	resources: string[]
