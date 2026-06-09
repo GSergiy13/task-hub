@@ -50,6 +50,13 @@ export const LastTasks = () => {
 					</h2>
 
 					<div>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+						eligendi, enim molestiae recusandae repellat nesciunt aperiam eum
+						ipsum doloremque aspernatur distinctio culpa eaque debitis incidunt
+						pariatur corporis. Adipisci, et inventore?
+					</div>
+
+					<div>
 						<LastTasksFilter
 							setStatus={setStatus}
 							status={status}
