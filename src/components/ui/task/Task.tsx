@@ -3,11 +3,15 @@ import {
 	Edit2,
 	Link as LinkIcon,
 	Image as LucideImage,
-	MessageSquareMore,
-	Plus
+	MessageSquareMore
 } from 'lucide-react'
+import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { CreateSubTaskModal } from '@/app/dashboard/last-tasks/create-sub-task/CreateSubTaskModal'
+
+import { ICON_MAP } from '@/utils/icon-map'
 
 import type { ITask } from '@/types/task.types'
 
@@ -17,17 +21,19 @@ interface Props {
 	task: ITask
 }
 
-export function Task({ task }: Props) {
+export const Task = observer(({ task }: Props) => {
 	const completedCount = task.subTasks.filter(t => t.isCompleted).length
 	const totalCount = task.subTasks.length
 	const progress = Math.round((completedCount / totalCount) * 100)
+
+	const Icon = ICON_MAP[task.icon]
 
 	return (
 		<div className='bg-card w-full min-w-0 rounded-xl p-3.5'>
 			<div className='mb-2 flex items-start justify-between gap-1'>
 				<div className='flex items-start gap-3'>
 					<div className='bg-primary/10 text-primary flex items-center justify-center rounded-full p-1.5 dark:bg-white/10 dark:text-white'>
-						<task.icon />
+						<Icon />
 					</div>
 
 					<div className='w-32'>
@@ -91,9 +97,7 @@ export function Task({ task }: Props) {
 				</div>
 
 				<div className='flex items-center gap-2'>
-					<button className='bg-primary rounded-full p-1.5 text-white dark:bg-white/10 dark:text-white'>
-						<Plus size={16} />
-					</button>
+					<CreateSubTaskModal taskId={task.id} />
 
 					<Link
 						href={Pages.TASK_EDIT(task.id)}
@@ -105,4 +109,4 @@ export function Task({ task }: Props) {
 			</div>
 		</div>
 	)
-}
+})

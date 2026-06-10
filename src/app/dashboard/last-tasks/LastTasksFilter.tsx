@@ -1,4 +1,6 @@
+import { taskStore } from '@/stores/task.store'
 import { cn } from '@/utils'
+import { observer } from 'mobx-react-lite'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -10,11 +12,6 @@ import {
 
 import type { TTaskStatus } from '@/types/task.types'
 
-interface Props {
-	status: TTaskStatus | null
-	setStatus: (status: TTaskStatus | null) => void
-}
-
 const statuses: Array<TTaskStatus | 'all'> = [
 	'all',
 	'not-started',
@@ -22,7 +19,9 @@ const statuses: Array<TTaskStatus | 'all'> = [
 	'completed'
 ]
 
-export function LastTasksFilter({ setStatus, status }: Props) {
+export const LastTasksFilter = observer(() => {
+	const currentStatus = taskStore.status
+
 	return (
 		<div>
 			<DropdownMenu>
@@ -31,17 +30,17 @@ export function LastTasksFilter({ setStatus, status }: Props) {
 						variant='outline'
 						className='capitalize'
 					>
-						{status?.replace('-', ' ') || 'All'}
+						{currentStatus?.replace('-', ' ') || 'All'}
 					</Button>
 				</DropdownMenuTrigger>
 
 				<DropdownMenuContent align='end'>
 					{statuses.map(s => (
 						<DropdownMenuItem
-							key={`${status}-${s}`}
-							onClick={() => setStatus(s === 'all' ? null : s)}
+							key={`${currentStatus}-${s}`}
+							onClick={() => taskStore.setStatus(s === 'all' ? null : s)}
 							className={cn(
-								status === s ? 'font-bold' : '',
+								currentStatus === s ? 'font-bold' : '',
 								'cursor-pointer capitalize'
 							)}
 						>
@@ -52,4 +51,4 @@ export function LastTasksFilter({ setStatus, status }: Props) {
 			</DropdownMenu>
 		</div>
 	)
-}
+})

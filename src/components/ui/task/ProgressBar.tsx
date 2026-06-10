@@ -32,7 +32,7 @@ export const ProgressBar = ({ progress }: { progress: number }) => {
 		<div className='bg-primary/10 relative h-8 w-full overflow-hidden rounded-full'>
 			<div
 				className={cn(
-					`flex h-full cursor-default items-center justify-center rounded-full bg-[length:28px_30px] font-medium text-white ${progressColor}`,
+					`flex h-full cursor-default items-center justify-center rounded-full bg-[length:28px_30px] font-medium text-white ${progressColor} transition-all duration-500 ease-in-out`,
 					{
 						'animate-stripes': clamped < 100
 					}

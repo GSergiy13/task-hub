@@ -1,14 +1,15 @@
 'use client'
 
+import { taskStore } from '@/stores/task.store'
 import { TaskSchema } from '@/zod-schemes/task.zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
+import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-
-import { TASKS } from '@/app/dashboard/last-tasks/last-tasks.data'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -34,7 +35,7 @@ interface Props {
 	id: string
 }
 
-export function TaskEditModalClient({ id }: Props) {
+export const TaskEditModalClient = observer(({ id }: Props) => {
 	const router = useRouter()
 
 	const closeModal = () => {
@@ -57,12 +58,20 @@ export function TaskEditModalClient({ id }: Props) {
 	}, [])
 
 	useEffect(() => {
-		console.log(id)
-		form.reset(TASKS.find(task => task.id === id) || {})
+		const task = taskStore.getTaskById(id)
+		if (!task) return
+
+		form.reset({
+			title: task.title,
+			dueDate: new Date(task.dueDate),
+			icon: task.icon
+		})
 	}, [id])
 
 	const onSubmit = (data: TTaskFormData) => {
-		console.log('Form submitted:', data)
+		taskStore.updateTask(id, data)
+
+		toast.success('Task updated successfully!')
 
 		closeModal()
 	}
@@ -178,4 +187,4 @@ export function TaskEditModalClient({ id }: Props) {
 			</div>
 		</div>
 	)
-}
+})
