@@ -1,4 +1,5 @@
 import { ProgressBar } from './ProgressBar'
+import { isToday } from 'date-fns'
 import {
 	Edit2,
 	Link as LinkIcon,
@@ -8,6 +9,7 @@ import {
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
 import { CreateSubTaskModal } from '@/app/dashboard/last-tasks/create-sub-task/CreateSubTaskModal'
 
@@ -28,6 +30,12 @@ export const Task = observer(({ task }: Props) => {
 
 	const Icon = ICON_MAP[task.icon]
 
+	const dueDate = useMemo(() => {
+		return isToday(task.dueDate.date)
+			? 'Today'
+			: `${Math.ceil((+task.dueDate.date - Date.now()) / (1000 * 60 * 60 * 24))} days`
+	}, [task.dueDate.date])
+
 	return (
 		<div className='bg-card w-full min-w-0 rounded-xl p-3.5'>
 			<div className='mb-2 flex items-start justify-between gap-1'>
@@ -42,13 +50,7 @@ export const Task = observer(({ task }: Props) => {
 						</p>
 
 						<div>
-							<p className='text-xs opacity-50'>
-								Due:{' '}
-								{Math.ceil(
-									(+task.dueDate - Date.now()) / (1000 * 60 * 60 * 24)
-								)}{' '}
-								days
-							</p>
+							<p className='text-xs opacity-50'>Due: {dueDate}</p>
 						</div>
 					</div>
 				</div>

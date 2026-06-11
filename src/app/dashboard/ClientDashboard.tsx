@@ -4,6 +4,7 @@ import { LastTasks } from './last-tasks/LastTasks'
 import { ProjectChart } from './project-chart/ProjectChart'
 import { ProjectStats } from './project-stats/ProjectStats'
 
+import { TasksTimeline } from '@/components/tasks-timeline/TasksTimeline'
 import { Heading } from '@/components/ui/Heading'
 import { SearchField } from '@/components/ui/search-field/SearchField'
 
@@ -27,9 +28,13 @@ export const ClientDashboard = () => {
 				</div>
 
 				<LastTasks />
+
+				<TasksTimeline />
 			</div>
 
-			<div className='flex h-screen items-center justify-center p-5'>Chat</div>
+			<div className='flex min-h-screen items-center justify-center p-5'>
+				Chat
+			</div>
 		</div>
 	)
 }

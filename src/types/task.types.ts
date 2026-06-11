@@ -10,13 +10,26 @@ export interface ISubTask {
 
 export interface ITask extends ISubTask {
 	icon: IconName
-	dueDate: Date
+	dueDate: {
+		date: Date
+		startTime?: Date
+		endTime?: Date
+	}
 	comments: string[]
 	resources: string[]
 	links: string[]
 	users: IProfile[]
 	subTasks: ISubTask[]
 }
+
+export interface ITaskWithTime extends ITask {
+	dueDate: {
+		date: Date
+		startTime: Date
+		endTime: Date
+	}
+}
+
 export type TTaskStatus =
 	| 'not-started'
 	| 'in-progress'
