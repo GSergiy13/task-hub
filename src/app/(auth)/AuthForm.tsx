@@ -1,7 +1,9 @@
 'use client'
 
+import { authStore } from '@/stores/auth.store'
 import { AuthSchema } from '@/zod-schemes/auth.zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -18,13 +20,13 @@ import {
 	FormMessage
 } from '@/components/ui/form'
 
-import { Pages } from '@/config/pages'
+import { DashboardPages } from '@/config/dashboard-pages'
 
 interface Props {
 	type: 'login' | 'register'
 }
 
-export const AuthForm = ({ type }: Props) => {
+export const AuthForm = observer(({ type }: Props) => {
 	const router = useRouter()
 	const isLogin = type === 'login'
 	const form = useForm<z.infer<typeof AuthSchema>>({
@@ -32,19 +34,20 @@ export const AuthForm = ({ type }: Props) => {
 	})
 
 	const onSubmit = (data: z.infer<typeof AuthSchema>) => {
-		toast.success(
-			isLogin ? 'Logged in successfully!' : 'Registered successfully!'
-		)
-
+		authStore.login()
 		form.reset()
-		router.replace(Pages.DASHBOARD)
+
+		if (authStore.isLoggedIn) {
+			toast.success(
+				isLogin ? 'Logged in successfully!' : 'Registered successfully!'
+			)
+
+			router.replace(DashboardPages.DASHBOARD)
+		}
 	}
 
 	return (
-		<BubbleBackground
-			// interactive
-			className='absolute inset-0 flex h-full min-h-screen w-full items-center justify-center'
-		>
+		<BubbleBackground className='absolute inset-0 flex h-full min-h-screen w-full items-center justify-center'>
 			<div className='relative z-10 w-full max-w-xl rounded-lg bg-white p-6 dark:bg-neutral-800'>
 				<h1 className='mb-4 text-2xl font-bold'>
 					{' '}
@@ -101,4 +104,4 @@ export const AuthForm = ({ type }: Props) => {
 			</div>
 		</BubbleBackground>
 	)
-}
+})

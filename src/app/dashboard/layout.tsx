@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import Sidebar from '@/components/layout/sidebar/Sidebar'
+import { Sidebar } from '@/components/layout/sidebar/Sidebar'
 
 interface Props {
 	children: ReactNode

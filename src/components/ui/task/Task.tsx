@@ -18,7 +18,7 @@ import { ICON_MAP } from '@/utils/icon-map'
 
 import type { ITask } from '@/types/task.types'
 
-import { Pages } from '@/config/pages'
+import { DashboardPages } from '@/config/dashboard-pages'
 
 interface Props {
 	task: ITask
@@ -133,7 +133,7 @@ export const Task = observer(({ task, isCalor, isMinimal }: Props) => {
 						<CreateSubTaskModal taskId={task.id} />
 
 						<Link
-							href={Pages.TASK_EDIT(task.id)}
+							href={DashboardPages.TASK_EDIT(task.id)}
 							className='bg-primary/10 text-primary block rounded-full p-1.5 dark:bg-white/10 dark:text-white'
 						>
 							<Edit2 size={16} />

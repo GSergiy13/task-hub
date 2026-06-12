@@ -1,6 +1,6 @@
 import { Link } from 'lucide-react'
 
-import { Pages } from '@/config/pages'
+import { DashboardPages } from '@/config/dashboard-pages'
 
 interface Props {
 	params: {
@@ -18,7 +18,7 @@ export default async function EditTaskPage({ params }: Props) {
 
 			<Link
 				className='text-blue-500 hover:underline'
-				href={Pages.DASHBOARD}
+				href={DashboardPages.DASHBOARD}
 			>
 				Go Back
 			</Link>
