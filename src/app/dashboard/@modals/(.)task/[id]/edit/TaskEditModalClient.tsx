@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
+import { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -42,10 +43,6 @@ export const TaskEditModalClient = observer(({ id }: Props) => {
 		router.back()
 	}
 
-	const form = useForm<TTaskFormData>({
-		resolver: zodResolver(TaskSchema)
-	})
-
 	useEffect(() => {
 		const handleEscape = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') {
@@ -57,13 +54,17 @@ export const TaskEditModalClient = observer(({ id }: Props) => {
 		return () => document.removeEventListener('keydown', handleEscape)
 	}, [])
 
+	const form = useForm<z.infer<typeof TaskSchema>>({
+		resolver: zodResolver(TaskSchema)
+	})
+
 	useEffect(() => {
 		const task = taskStore.getTaskById(id)
 		if (!task) return
 
 		form.reset({
 			title: task.title,
-			dueDate: new Date(task.dueDate),
+			dueDate: new Date(task.dueDate.date),
 			icon: task.icon
 		})
 	}, [id])

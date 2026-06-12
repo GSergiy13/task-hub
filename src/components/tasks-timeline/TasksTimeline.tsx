@@ -59,13 +59,17 @@ export const TasksTimeline = observer(() => {
 						return (
 							<div
 								key={task.id}
-								className='bg-primary/10 text-primary absolute top-2'
+								className='absolute top-2'
 								style={{
 									left: `${startPosition}%`,
 									width: `${endPosition - startPosition}%`
 								}}
 							>
-								<Task task={task} />
+								<Task
+									task={task}
+									isCalor
+									isMinimal
+								/>
 							</div>
 						)
 					})}

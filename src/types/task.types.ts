@@ -10,6 +10,8 @@ export interface ISubTask {
 
 export interface ITask extends ISubTask {
 	icon: IconName
+	color?: 'bg-violet-200' | 'bg-yellow-300' | 'bg-pink-300'
+
 	dueDate: {
 		date: Date
 		startTime?: Date

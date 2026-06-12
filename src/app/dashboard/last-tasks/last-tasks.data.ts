@@ -8,10 +8,11 @@ export const TASKS: ITask[] = [
 		id: '1',
 		title: 'Travel App User Flow',
 		icon: 'Plane',
+		color: 'bg-violet-200',
 		dueDate: {
 			date: new Date(),
-			startTime: setMinutes(setHours(new Date(), 10), 0),
-			endTime: setMinutes(setHours(new Date(), 13), 30)
+			startTime: setMinutes(setHours(new Date(), 14), 0),
+			endTime: setMinutes(setHours(new Date(), 16), 30)
 		},
 		comments: ['This is a comment', 'Another comment', 'Yet another comment'],
 		resources: ['', '', '', '', '', ''],
@@ -44,10 +45,11 @@ export const TASKS: ITask[] = [
 		id: '2',
 		title: 'E-commerce Website Redesign',
 		icon: 'ShoppingBasket',
+		color: 'bg-pink-300',
 		dueDate: {
 			date: new Date(),
 			startTime: setMinutes(setHours(new Date(), 10), 0),
-			endTime: setMinutes(setHours(new Date(), 13), 30)
+			endTime: setMinutes(setHours(new Date(), 13), 0)
 		},
 		comments: ['Initial design review', 'Feedback received'],
 		resources: ['', '', '', '', ''],
@@ -65,6 +67,7 @@ export const TASKS: ITask[] = [
 		id: '3',
 		title: 'Mobile App Feature Update',
 		icon: 'TabletSmartphone',
+		color: 'bg-yellow-300',
 		dueDate: {
 			date: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
 		},
