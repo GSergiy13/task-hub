@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
-import { BubbleBackground } from '@/components/animate-ui/components/backgrounds/bubble'
 import { Button } from '@/components/ui/button'
 import {
 	Form,
@@ -47,7 +46,7 @@ export const AuthForm = observer(({ type }: Props) => {
 	}
 
 	return (
-		<BubbleBackground className='absolute inset-0 flex h-full min-h-screen w-full items-center justify-center'>
+		<div className='absolute inset-0 flex h-full min-h-screen w-full items-center justify-center'>
 			<div className='relative z-10 w-full max-w-xl rounded-lg bg-white p-6 dark:bg-neutral-800'>
 				<h1 className='mb-4 text-2xl font-bold'>
 					{' '}
@@ -102,6 +101,6 @@ export const AuthForm = observer(({ type }: Props) => {
 					</form>
 				</Form>
 			</div>
-		</BubbleBackground>
+		</div>
 	)
 })

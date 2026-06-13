@@ -44,7 +44,7 @@ export const Task = observer(({ task, isCalor, isMinimal }: Props) => {
 			className={cn(
 				'bg-card w-full min-w-0 rounded-xl p-3.5',
 				isCalor && task.color,
-				isCalor && 'text-white'
+				isCalor && 'text-foreground'
 			)}
 		>
 			<div
@@ -57,7 +57,7 @@ export const Task = observer(({ task, isCalor, isMinimal }: Props) => {
 					<div
 						className={cn(
 							'bg-primary/10 text-primary flex items-center justify-center rounded-full p-1.5 dark:bg-white/10 dark:text-white',
-							isCalor && 'bg-white/20 text-white'
+							isCalor && 'bg-card text-primary'
 						)}
 					>
 						<Icon />
@@ -90,7 +90,7 @@ export const Task = observer(({ task, isCalor, isMinimal }: Props) => {
 								alt={user.name}
 								width={32}
 								height={32}
-								className='rounded-full border border-white dark:border-neutral-800'
+								className='border-foreground rounded-full border dark:border-neutral-800'
 							/>
 						</div>
 					))}
@@ -134,7 +134,7 @@ export const Task = observer(({ task, isCalor, isMinimal }: Props) => {
 
 						<Link
 							href={DashboardPages.TASK_EDIT(task.id)}
-							className='bg-primary/10 text-primary block rounded-full p-1.5 dark:bg-white/10 dark:text-white'
+							className='bg-card text-primary block rounded-full p-1.5 dark:text-white'
 						>
 							<Edit2 size={16} />
 						</Link>

@@ -8,7 +8,7 @@ export const TASKS: ITask[] = [
 		id: '1',
 		title: 'Travel App User Flow',
 		icon: 'Plane',
-		color: 'bg-violet-200',
+		color: 'bg-violet-200 dark:bg-violet-600',
 		dueDate: {
 			date: new Date(),
 			startTime: setMinutes(setHours(new Date(), 14), 0),
