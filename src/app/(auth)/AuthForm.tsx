@@ -1,6 +1,6 @@
 'use client'
 
-import { authStore } from '@/stores/auth.store'
+import { signInWithEmail } from './actions'
 import { AuthSchema } from '@/zod-schemes/auth.zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { observer } from 'mobx-react-lite'
@@ -19,8 +19,6 @@ import {
 	FormMessage
 } from '@/components/ui/form'
 
-import { DashboardPages } from '@/config/dashboard-pages'
-
 interface Props {
 	type: 'login' | 'register'
 }
@@ -33,16 +31,12 @@ export const AuthForm = observer(({ type }: Props) => {
 	})
 
 	const onSubmit = (data: z.infer<typeof AuthSchema>) => {
-		authStore.login()
-		form.reset()
-
-		if (authStore.isLoggedIn) {
+		signInWithEmail({ email: data.email }).then(() => {
+			form.reset()
 			toast.success(
-				isLogin ? 'Logged in successfully!' : 'Registered successfully!'
+				'Link to sign in has been sent to your email. Please check your inbox.'
 			)
-
-			router.replace(DashboardPages.DASHBOARD)
-		}
+		})
 	}
 
 	return (
